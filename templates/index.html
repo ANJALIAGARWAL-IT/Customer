@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Predictor</title>
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+
+        <!-- Website Title -->
+    	<div class="container">
+            <h2 class='container-heading'><span class="heading_font">CUSTOMER CHURN PREDICTOR</span></h2>
+            <div class='description'>
+    			<p>A Machine Learning Web App using Flask and Heroku.</p>
+    		</div>
+    	</div>
+
+    
+    
+    
+        
+        <form action="{{ url_for('predict')}}" method="post">
+	    <h1>Customer Churn Predictor</h1>
+	    
+    <div class="contentform">
+    	<div id="sendmessage"> Your message has been sent successfully. Thank you. </div>
+
+        
+    	<div class="leftcontact">
+			      <div class="form-group">
+			        <p>Credit Score<span>*</span></p>
+			        <span class="icon-case"></span>
+				        <input name="CreditScore"  name="CreditScore" type="number" placeholder=" eg- 600" >
+                <div class="validation"></div>
+       </div> 
+
+            <div class="form-group">
+            <p>Age <span>*</span></p>
+            <span class="icon-case"></span>
+				<input name="Age" required="required" placeholder=" eg- 5">
+                <div class="validation"></div>
+			</div>
+
+			<div class="form-group">
+			<p>Tenure <span>*</span></p>	
+			<span class="icon-case"></span>
+                <input name="Tenure" required="required" placeholder=" eg- 40">
+                <div class="validation"></div>
+			</div>	
+
+			<div class="form-group">
+			<p>Enter the Account Balance:  <span>*</span></p>
+			<span class="icon-case"></span>
+				<input name="Balance" required="required" placeholder=" eg- 50000">
+                <div class="validation"></div>
+			</div>
+
+			<div class="form-group">
+			<p>Number of Products <span>*</span></p>
+			<span class="icon-case"></span>
+				<input name="NumOfProducts" required="required" placeholder=" eg- 2">
+                <div class="validation"></div>
+			</div>
+
+			<div class="form-group">
+			<p>Do the Customer have Credit Card? (1=Yes, 0=No) <span>*</span></p>
+			<span class="icon-case"></span>
+				<input name="HasCrCard" required="required" placeholder=" eg- 1 or 0">
+                <div class="validation"></div>
+			</div>	
+
+
+
+	</div>
+
+	<div class="rightcontact">	
+
+			<div class="form-group">
+			<p>Is the Customer Active Member (1=Yes, 0=No)<span>*</span></p>
+			<span class="icon-case"></span>
+				<input name="IsActiveMember" required="required" placeholder=" eg- 1 or 0">
+                <div class="validation"></div>
+			</div>	
+
+			<div class="form-group">
+			<p>Enter the Estimated Salary: <span>*</span></p>	
+			<span class="icon-case"></span>
+				<input name="EstimatedSalary" required="required" placeholder=" eg- 10000">
+                <div class="validation"></div>
+			</div>
+
+			<div class="form-group">
+			<p>Enter The Location: <span>*</span></p>
+			<span class="icon-case"></span>
+                <select name="Geography_Germany" required="required" >
+                <option value="Germany">Germany</option>
+                <option value="Spain">Spain</option>
+                <option value="France">France</option>
+            </select>
+            <div class="validation"></div>
+			</div>
+
+			<div class="form-group">
+			<p>Gender of Customer:  <span>*</span></p>	
+			<span class="icon-case"></span>
+                <select name="Gender_Male" id="resea" required="required">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+                <div class="validation"></div>
+			</div>
+		
+			
+	</div>
+	</div>
+<button  type="submit " class="btn btn-lg btn-info mb-5 ml-5" style="box-shadow: 0 4px 15px 0 rgba(255,33,36); background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);">Predictor</button>
+	
+</form>	
+
+    </div>
+    <!-- Footer -->
+       <div class='footer'>
+       <h3 class="alert alert-primary text-center" role="alert">{{ prediction_text }}<h3>
+       
+             <div class="contact">
+               <a target="_blank" href="https://github.com/ANJALIAGARWAL-IT"><i class="fab fa-github fa-lg contact-icon"></i></a>
+              <a target="_blank" href="https://in.linkedin.com/in/anjaliagarwal98"><i class="fab fa-linkedin fa-lg contact-icon"></i></a> 
+           </div>
+           <p class='footer-description'>Anjali Agarwal.</p>
+       </div>
+
+
+
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+}
+body {
+     background: rgb(255,33,36)
+         font-family: sans-serif;
+    background-image: url(https://imgur.com/QYJ3y84.jpg) !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100%!important;
+}
+/* Website Title */
+.container{
+    padding: 30px;
+	position: relative;
+	background: linear-gradient(45deg,  #310ecc, #a72525,  #5c18c9);
+	background-size: 500% 500%;
+	animation: change-gradient 10s ease-in-out infinite;
+}
+@keyframes change-gradient {
+	0%{
+		background-position: 0 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0 50%;
+	}
+}
+
+.container-heading{
+    margin: 0;
+}
+
+ #banner {
+         background: rgb(255,33,36) !important;
+         color: #cf3232;
+         padding-top: 5%;
+      }
+      .promo-title {
+        font-size: 40px;
+        font-weight: 600;
+        margin-top: 100px;
+      }
+      body {
+  margin: auto;
+  background: #eaeaea;  
+  font-family: 'Open Sans', sans-serif;
+}
+ .info p {
+  text-align:center;
+  color: #999;
+  text-transform:none;
+  font-weight:600;
+  font-size:15px;
+  margin-top:2px
+}
+
+.info i {
+  color:#523f3f;
+}
+form h1 {
+  font-size: 18px;
+  background:blue none repeat scroll 0% 0%;
+  color: rgb(0,0,0);
+  padding: 22px 25px;
+  border-radius: 5px 5px 0px 0px;
+  margin: auto;
+  text-shadow: none; 
+  text-align:left
+}
+
+form {
+  border-radius: 5px;
+  max-width:700px;
+  width:100%;
+  margin: 5% auto;
+  background-color: #FFFFFF;
+  overflow: hidden;
+}
+
+p span {
+  color: #F00;
+}
+
+p {
+  margin: 0px;
+  font-weight: 500;
+  line-height: 2;
+  color:#333;
+}
+
+h1 {
+  text-align:center; 
+  color: #666;
+  text-shadow: 1px 1px 0px #FFF;
+  margin:50px 0px 0px 0px
+}
+
+input {
+  border-radius: 0px 5px 5px 0px;
+  border: 1px solid #eee;
+  margin-bottom: 15px;
+  width: 75%;
+  height: 40px;
+  float: left;
+  padding: 0px 15px;
+}
+
+a {
+  text-decoration:inherit
+}
+
+textarea {
+  border-radius: 0px 5px 5px 0px;
+  border: 1px solid #EEE;
+  margin: 0;
+  width: 75%;
+  height: 130px; 
+  float: left;
+  padding: 0px 15px;
+}
+
+.form-group {
+  overflow: hidden;
+  clear: both;
+}
+
+.icon-case {
+  width: 35px;
+  float: left;
+  border-radius: 5px 0px 0px 5px;
+  background:#eeeeee;
+  height:42px;
+  position: relative;
+  text-align: center;
+  line-height:40px;
+}
+
+i {
+  color:#555;
+}
+
+.contentform {
+  padding: 40px 30px;
+}
+
+.bouton-contact{
+  background-color: #523f3f;
+  color: #523f3f;
+  text-align: center;
+  width: 100%;
+  border:0;
+  padding: 17px 25px;
+  border-radius: 0px 0px 5px 5px;
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+.leftcontact {
+  width:49.5%; 
+  float:left;
+  border-right: 1px dotted #CCC;
+  box-sizing: border-box;
+  padding: 0px 15px 0px 0px;
+}
+
+.rightcontact {
+  width:49.5%;
+  float:right;
+  box-sizing: border-box;
+  padding: 0px 0px 0px 15px;
+}
+
+.validation {
+  display:none;
+  margin: 0 0 10px;
+  font-weight:400;
+  font-size:13px;
+  color: #DE5959;
+}
+
+#sendmessage {
+  border:1px solid #fff;
+  display:none;
+  text-align:center;
+  margin:10px 0;
+  font-weight:600;
+  margin-bottom:30px;
+  background-color: #EBF6E0;
+  color: #5F9025;
+  border: 1px solid #B3DC82;
+  padding: 13px 40px 13px 18px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.03);
+}
+
+#sendmessage.show,.show  {
+  display:block;
+}
+
+/* Contact */
+.contact-icon{
+	color: #ffffff;
+	padding: 7px;
+}
+
+.contact-icon:hover{
+	color: #8c8c8c;
+}
+
+/* Footer */
+.footer{
+	flex-shrink: 0;
+	position: relative;
+  text-align: center;
+	padding: 20px;
+	background: linear-gradient(45deg,  #310ecc, #a72525, #310ecc);
+	background-size: 500% 500%;
+	animation: change-gradient 10s ease-in-out infinite;
+}
+
+.footer-description{
+	color: #ffffff;
+  text-align: center;
+	margin: 0;
+	font-size: 12px;
+}       
+
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+
+</html>
